@@ -1,5 +1,5 @@
 <?php
-// (optionnel) petite “validation” côté serveur
+
 $sent = false;
 $errors = array();
 
