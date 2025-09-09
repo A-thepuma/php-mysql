@@ -1,6 +1,6 @@
 <?php
 
-$sent = false;
+$sent = isset($_GET['sent']) && $_GET['sent'] == 1;
 $errors = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
     
-        $sent = true;
+       header('Location: contact.php?sent=1&email=' . urlencode($email) . '&message=' . urlencode($message));
+       exit;
     }
 }
 ?>
@@ -34,13 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="container py-3">
 
     <?php include 'header.php'; ?>
-
+  
     <h1>Contactez-nous</h1>
 
-    <?php if ($sent): ?>
-      <div class="alert alert-success">
-        Merci ! Votre message a bien été envoyé (demo).
-      </div>
+    <?php
+     if ($sent): ?>
+      <?php 
+      include 'submit_contact.php'; ?>
+      
     <?php else: ?>
 
       <?php if (!empty($errors)): ?>
