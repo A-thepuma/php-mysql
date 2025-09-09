@@ -32,6 +32,7 @@ $invalid = ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL) || $mess
     <?php endif; ?>
 
     <?php include 'footer.php'; ?>
+    
   </div>
 </body>
 </html>
