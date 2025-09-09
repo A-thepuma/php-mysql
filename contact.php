@@ -45,11 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       
     <?php else: ?>
 
-      <?php if (!empty($errors)): ?>
-        <div class="alert alert-danger">
-          <?php echo implode('<br>', array_map('htmlspecialchars', $errors)); ?>
-        </div>
-      <?php endif; ?>
 
       <form method="post" class="mt-3" novalidate>
         <div class="mb-3">
