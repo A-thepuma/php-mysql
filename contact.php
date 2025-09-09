@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (empty($errors)) {
-    
+
   }
 }
 ?>
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     <?php endif; ?>
 
-    <form method="post" action="submit_contact.php" class="mt-3" novalidate>
+    <form method="post" action="submit_contact.php" enctype="multipart/form-data" class="mt-3" novalidate>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="vous@exemple.com"
@@ -53,6 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           required><?php echo isset($message) ? htmlspecialchars($message) : ''; ?></textarea>
       </div>
 
+      <!-- Ajout champ d'upload ! -->
+      <div class="mb-3">
+        <label for="screenshot" class="form-label">Votre capture d'écran</label>
+        <input type="file" class="form-control" id="screenshot" name="screenshot" />
+      </div>
+      <!-- Fin ajout du champ -->
       <button type="submit" class="btn btn-primary">Envoyer</button>
     </form>
 
