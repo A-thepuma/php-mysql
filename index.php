@@ -20,7 +20,7 @@
 
         <?php include 'header.php'; ?>
 
-        <!-- Inclusion des fichiers utilitaires -->
+        <!-- Voici Inclusion des fichiers utilitaires -->
 
         <?php
         include_once('variables.php');
