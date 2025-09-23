@@ -1,4 +1,14 @@
-<?php session_start(); // $_SESSION ?>
+<?php session_start(); // $_SESSION 
+require_once __DIR__ . '/mysql.php';      
+require_once __DIR__ . '/variables.php';  
+require_once __DIR__ . '/functions.php';
+
+// Récupération des recettes 
+$sqlQuery = 'SELECT * FROM recipes WHERE is_enabled = 1';
+$recipesStatement = $db->prepare($sqlQuery);
+$recipesStatement->execute();
+$recipes = $recipesStatement->fetchAll();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -15,22 +25,6 @@
 
         <!-- Navigation -->
         <?php include_once('header.php'); ?>
-
-        <!-- Connexion PDO -->
-        <?php require_once __DIR__ . '/mysql.php'; ?>
-
-        <!-- Inclusion des fichiers utilitaires -->
-        <?php
-
-        include_once('variables.php');
-        include_once('functions.php');
-
-        // Récupération des recettes valides depuis la BDD
-        $sqlQuery = 'SELECT * FROM recipes WHERE is_enabled = 1';
-        $recipesStatement = $db->prepare($sqlQuery);
-        $recipesStatement->execute();
-        $recipes = $recipesStatement->fetchAll(PDO::FETCH_ASSOC);
-        ?>
 
         <!-- Inclusion du formulaire de connexion -->
         <?php include_once('login.php'); ?>
