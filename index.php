@@ -1,4 +1,40 @@
-<?php ob_start(); session_start(); ?>
+<?php
+session_start();
+
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    $_SESSION = [];
+    session_destroy();
+    setcookie('LOGGED_USER', '', time() - 3600, "", "", false, true);
+    header('Location: index.php'); // retour sur la page avec le formulaire
+    exit;
+}
+
+if (!isset($_SESSION['LOGGED_USER']) && isset($_COOKIE['LOGGED_USER'])) {
+    require_once __DIR__ . '/variables.php'; 
+
+    $cookieEmail = (string) $_COOKIE['LOGGED_USER'];
+    $matched = null;
+    foreach ($users as $u) {
+        if (isset($u['email']) && strcasecmp($u['email'], $cookieEmail) === 0) {
+            $matched = $u; break;
+        }
+    }
+    if ($matched) {
+        $_SESSION['LOGGED_USER'] = [
+            'email' => $matched['email'],
+            'full_name' => isset($matched['full_name']) ? $matched['full_name'] : '',
+            'age' => isset($matched['age']) ? $matched['age'] : null,
+        ];
+    }
+}
+
+$loggedUser = isset($_SESSION['LOGGED_USER']) ? $_SESSION['LOGGED_USER'] : null;
+
+// includes utilitaires et header
+include_once 'variables.php';
+include_once 'functions.php'; 
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
