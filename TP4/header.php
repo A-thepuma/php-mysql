@@ -13,6 +13,10 @@
         <li class="nav-item">
           <a class="nav-link" href="contact.php">Contact</a>
         </li>
+        <li>
+          <a href="create_recipe.php">Ajouter une recette</a>
+        </li>
+
       </ul>
     </div>
   </div>
