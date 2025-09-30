@@ -21,7 +21,7 @@ if (!isset($_SESSION['LOGGED_USER']) && isset($_COOKIE['LOGGED_USER'])) {
     ];
 }
 
-$loggedUser = $_SESSION['LOGGED_USER'] ?? null;
+$loggedUser = isset($_SESSION['LOGGED_USER']) ? $_SESSION['LOGGED_USER'] : null;
 
 // --- Charger les recettes publiées (BDD) ---
 $sqlQuery = 'SELECT recipe_id, title, recipe, author
@@ -61,6 +61,10 @@ $recipes = $recipesStatement->fetchAll(PDO::FETCH_ASSOC);
                                 <h3 class="h4 card-title mb-2">
                                     <?= htmlspecialchars($recipe['title']) ?>
                                 </h3>
+
+                                <?php if (isset($_GET['created'])): ?>
+                                    <div class="alert alert-success">Recette ajoutée avec succès.</div>
+                                <?php endif; ?>
 
                                 <?php if (!empty($recipe['recipe'])): ?>
                                     <p class="card-text mb-2">

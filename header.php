@@ -1,3 +1,9 @@
+<?php if (isset($_SESSION['LOGGED_USER'])): ?>
+  <li class="nav-item">
+    <a class="nav-link" href="ajouter_recette.php">Ajouter une recette</a>
+  </li>
+<?php endif; ?>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mt-3 mb-4 rounded shadow-sm">
   <div class="container-fluid">
     <a class="navbar-brand fw-semibold" href="index.php">Site de recettes</a>
@@ -13,3 +19,4 @@
     </div>
   </div>
 </nav>
+
