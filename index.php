@@ -75,6 +75,14 @@ $recipes = $recipesStatement->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="author">
                                     <?= htmlspecialchars($recipe['author'] ?: 'Anonyme') ?>
                                 </div>
+
+                                <?php if (isset($_SESSION['LOGGED_USER']) && strcasecmp($recipe['author'], $_SESSION['LOGGED_USER']['email']) === 0): ?>
+                                    <div class="mt-2">
+                                        <a class="btn btn-sm btn-outline-secondary"
+                                            href="editer_recette.php?id=<?= (int) $recipe['recipe_id'] ?>">Modifier</a>
+                                    </div>
+                                <?php endif; ?>
+
                             </div>
                         </article>
                     </div>
