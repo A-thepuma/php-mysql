@@ -81,6 +81,19 @@ $recipes = $recipesStatement->fetchAll(PDO::FETCH_ASSOC);
                                         <a class="btn btn-sm btn-outline-secondary"
                                             href="editer_recette.php?id=<?= (int) $recipe['recipe_id'] ?>">Modifier</a>
                                     </div>
+
+                                <?php endif; ?>
+                                <?php if (isset($_SESSION['LOGGED_USER']) && strcasecmp($recipe['author'], $_SESSION['LOGGED_USER']['email']) === 0): ?>
+                                    <div class="mt-2 d-flex gap-2">
+                                        <a class="btn btn-sm btn-outline-secondary"
+                                            href="editer_recette.php?id=<?= (int) $recipe['recipe_id'] ?>">Modifier</a>
+
+                                        <form method="post" action="supprimer_recette.php"
+                                            onsubmit="return confirm('Supprimer cette recette ?');" class="d-inline">
+                                            <input type="hidden" name="id" value="<?= (int) $recipe['recipe_id'] ?>">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
+                                        </form>
+                                    </div>
                                 <?php endif; ?>
 
                             </div>
